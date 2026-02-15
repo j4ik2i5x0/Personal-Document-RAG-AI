@@ -21,7 +21,7 @@ A minimal Retrieval-Augmented Generation (RAG) pipeline using:
 1) Clone the repo
 
 ```powershell
-git clone <your-repo-url>
+git clone https://github.com/j4ik2i5x0/Personal-Document-RAG-AI.git
 cd RAG-Model
 ```
 
