@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap");
+@import "katex/dist/katex.min.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-night text-mist font-body min-h-screen;
+  background-image:
+    radial-gradient(circle at 80% 15%, rgba(37, 226, 193, 0.2), transparent 40%),
+    radial-gradient(circle at 10% 30%, rgba(80, 120, 255, 0.15), transparent 35%),
+    radial-gradient(circle at 30% 80%, rgba(246, 178, 107, 0.12), transparent 35%);
+}
+
+.glass-panel {
+  @apply bg-slate/80 border border-white/10 shadow-2xl backdrop-blur-md;
+}
+
+.section-title {
+  @apply font-display text-xl text-mist;
+}
+
+.badge {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold tracking-widest;
+  background: rgba(37, 226, 193, 0.15);
+  color: #25e2c1;
+}
+
+.chat-bubble-user {
+  @apply bg-neon/20 text-mist border border-neon/30;
+}
+
+.chat-bubble-ai {
+  @apply bg-white/5 border border-white/10 text-mist;
+}
+
+.chat-content {
+  @apply text-sm leading-relaxed;
+}
+
+.chat-content code {
+  @apply rounded bg-white/10 px-1 py-0.5 text-xs text-mist;
+}
+
+.chat-content pre {
+  @apply mt-3 rounded-xl bg-black/40 p-3 text-xs text-mist overflow-x-auto;
+}
+
+.chat-inline-code {
+  @apply rounded bg-white/10 px-1 py-0.5 text-xs text-mist;
+}
+
+.code-block {
+  @apply mt-3 rounded-2xl border border-white/10 bg-black/40 overflow-hidden;
+}
+
+.code-block-header {
+  @apply flex items-center justify-between border-b border-white/10 px-3 py-2 text-[11px] uppercase tracking-[0.2em] text-mist/60;
+}
+
+.code-block-header button {
+  @apply rounded-full border border-white/10 px-3 py-1 text-[10px] text-mist/70 hover:border-white/30 hover:text-mist;
+}
+
+.code-block-body {
+  @apply m-0 bg-transparent p-3 text-xs text-mist overflow-x-auto;
+}

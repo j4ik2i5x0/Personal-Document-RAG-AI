@@ -1,4 +1,5 @@
 import os
+import uuid
 from typing import List
 
 import chromadb
@@ -57,7 +58,7 @@ def store_in_chroma(chunks: List[str], embeddings: List[List[float]]):
     client = _get_chroma_client()
     collection = _get_collection(client)
 
-    ids = [f"chunk_{i}" for i in range(len(chunks))]
+    ids = [str(uuid.uuid4()) for _ in chunks]
     metadatas = [{"chunk_index": i} for i in range(len(chunks))]
     collection.add(documents=chunks, embeddings=embeddings, ids=ids, metadatas=metadatas)
 

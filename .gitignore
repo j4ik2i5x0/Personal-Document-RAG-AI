@@ -21,3 +21,9 @@ Thumbs.db
 
 # Chroma local data (if used)
 chroma/
+chroma_db/
+
+# Next.js
+web/node_modules/
+web/.next/
+web/.env.local

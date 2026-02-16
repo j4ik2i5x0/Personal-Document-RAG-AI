@@ -2,7 +2,7 @@
 
 A minimal Retrieval-Augmented Generation (RAG) pipeline using:
 - Gemini embeddings + Gemini LLM (google-genai)
-- ChromaDB (hosted) for vector storage
+- ChromaDB (cloud) for vector storage
 - PDF ingestion via pypdf
 
 ## Project Structure
@@ -10,11 +10,11 @@ A minimal Retrieval-Augmented Generation (RAG) pipeline using:
 - chunker.py: text chunking utilities
 - pdfreader.py: PDF text extraction
 - embedder.py: Gemini embedding calls
-- vectorstore.py: ChromaDB storage and search helpers
+- vectorstore.py: ChromaDB storage and search helpers (cloud)
 - dataprocessor.py: ingestion pipeline (PDF -> chunks -> embeddings -> Chroma)
 - QueryProcessor.py: query pipeline (query -> embedding -> retrieval -> LLM)
+- web/: Next.js UI
 - llm.py: Gemini LLM call with context
-- resources/: store PDFs for ingestion
 
 ## Setup
 
@@ -48,6 +48,7 @@ CHROMA_API_KEY=your_chroma_api_key
 CHROMA_TENANT=your_tenant_id
 CHROMA_DATABASE=rag-model
 CHROMA_COLLECTION=rag-chunks
+STREAMLIT_MAX_UPLOAD_MB=200
 GEMINI_API_KEY=your_gemini_api_key
 GEMINI_EMBEDDING_MODEL=models/gemini-embedding-001
 GEMINI_LLM_MODEL=gemini-2.5-flash
@@ -55,15 +56,14 @@ GEMINI_TEMPERATURE=0.4
 ```
 
 Notes:
-- If your Chroma instance does not use tenant/database, leave them blank.
 - If your Gemini account exposes different embedding models, update GEMINI_EMBEDDING_MODEL.
 
 ## Ingest Documents
 
-Put a PDF in resources/ (default: resources/OOPS.pdf), then run:
+Run the CLI ingestion with an explicit PDF path:
 
 ```powershell
-python .\dataprocessor.py
+python .\dataprocessor.py path\to\your.pdf
 ```
 
 This will extract text, chunk it, embed each chunk, and store vectors in ChromaDB.
@@ -75,6 +75,29 @@ python .\QueryProcessor.py
 ```
 
 This embeds the user query, retrieves top matches from ChromaDB, and sends query+context to Gemini.
+
+## Next.js UI
+
+Install frontend dependencies:
+
+```powershell
+cd web
+npm install
+```
+
+Start the web app:
+
+```powershell
+npm run dev
+```
+
+Open http://localhost:3000 and upload PDFs before chatting.
+
+Optional: set PYTHON_EXECUTABLE in web/.env.local if your Python binary is not on PATH:
+
+```dotenv
+PYTHON_EXECUTABLE=C:\\path\\to\\python.exe
+```
 
 ## Security
 

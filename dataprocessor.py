@@ -1,12 +1,13 @@
-from pdfreader import read_pdf
+import os
+import sys
+
 from chunker import chunk_pages
 from embedder import embed_chunks
+from pdfreader import read_pdf
 from vectorstore import store_in_chroma
-from typing import List
 
-pdf_path="./resources/OOPS.pdf"
-def run():
-    # Read HR Policy PDF and extract text
+
+def run(pdf_path: str) -> None:
     pages = read_pdf(pdf_path)
 
     # Chunk the extracted text into manageable pieces
@@ -15,7 +16,12 @@ def run():
     embedded_chunks = embed_chunks(chunks)
     
     store_in_chroma(chunks, embedded_chunks)
+
+    print(f"chunks:{len(chunks)}")
    
     
 if __name__ == "__main__":
-    run()
+    if len(sys.argv) < 2:
+        raise SystemExit("Usage: python dataprocessor.py <path_to_pdf>")
+
+    run(sys.argv[1])
