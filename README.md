@@ -5,6 +5,8 @@ A minimal Retrieval-Augmented Generation (RAG) pipeline using:
 - ChromaDB (cloud) for vector storage
 - PDF ingestion via pypdf
 
+The UI is a Next.js app styled like NotebookLM and calls the Python pipeline through API routes.
+
 ## Project Structure
 
 - chunker.py: text chunking utilities
@@ -48,7 +50,6 @@ CHROMA_API_KEY=your_chroma_api_key
 CHROMA_TENANT=your_tenant_id
 CHROMA_DATABASE=rag-model
 CHROMA_COLLECTION=rag-chunks
-STREAMLIT_MAX_UPLOAD_MB=200
 GEMINI_API_KEY=your_gemini_api_key
 GEMINI_EMBEDDING_MODEL=models/gemini-embedding-001
 GEMINI_LLM_MODEL=gemini-2.5-flash
@@ -102,3 +103,5 @@ PYTHON_EXECUTABLE=C:\\path\\to\\python.exe
 ## Security
 
 Never commit real API keys. Rotate any keys that have been exposed.
+
+Note: The Next.js API routes shell out to the Python pipeline from the repo root.
